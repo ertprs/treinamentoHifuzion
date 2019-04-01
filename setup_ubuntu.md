@@ -10,6 +10,8 @@ Como root, atualize os pacotes já instalados.
 
 ## Git
 
+Instale o git `sudo apt install git`
+
 Com o usuário `deploy` vamos configurar o git. Para isso vamos criar a chave ssh e configurar o usuário e email global
 
 Vamos Gerar a Chave
