@@ -10,6 +10,8 @@ Como root, atualize os pacotes já instalados.
 
 ## Git
 
+Instale o git `sudo apt install git`
+
 Com o usuário `deploy` vamos configurar o git. Para isso vamos criar a chave ssh e configurar o usuário e email global
 
 Vamos Gerar a Chave
@@ -81,6 +83,14 @@ v4.2.6
 sudo npm install -g npm
 ```
 
+Instalando o yarn
+
+```bash
+curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+     sudo apt-get update && sudo apt-get install yarn
+```
+
 ## Backend
 
 Dependencias
@@ -102,6 +112,7 @@ echo '# PYENV' >> ~/.profile
 echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.profile
 echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.profile
 echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.profile
+source ~/.profile
 ```
 
 Vamos instalar o python 3.6.6
