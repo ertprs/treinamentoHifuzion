@@ -1,5 +1,5 @@
 <template>
-  <v-app id="inspire">
+  <v-app id="hifuzion">
     <hfz-menu titulo="HIFuzion WEB" :menus="menus"/>
     <v-content>
       <v-container fluid>
@@ -11,14 +11,14 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       menus: [
-        { para: "cliente", icone: "supervised_user_circle" },
-        { para: "conta", icone: "featured_play_list" },
-        { para: "usuario", icone: "account_circle" }
+        { para: 'cliente', icone: 'supervised_user_circle' },
+        { para: 'conta', icone: 'featured_play_list' },
+        { para: 'usuario', icone: 'account_circle' }
       ]
-    };
+    }
   }
-};
+}
 </script>
