@@ -15,6 +15,27 @@ export default new Vuex.Store({
     CHANGE_CLIENTES (state, clientes) {
       state.clientes = clientes
     },
+    CREATE_CLIENTE (state, cliente) {
+      state.clientes.push(cliente)
+    },
+    UPDATE_CLIENTE (state, cliente) {
+      state.clientes.forEach((c, k) => {
+        if (c.id === cliente.id) {
+          state.clientes[k]['nome'] = cliente.nome
+          state.clientes[k]['fone'] = cliente.fone
+          state.clientes[k]['email'] = cliente.email
+          state.clientes[k]['conta'] = cliente.conta
+          state.clientes[k]['conta_display'] = state.contas.filter(c => c.id === cliente.conta)[0]['nome']
+        }
+      })
+    },
+    DELETE_CLIENTE (state, cliente) {
+      state.clientes.forEach((c, k) => {
+        if (c.id === cliente.id) {
+          state.clientes.splice(k, 1)
+        }
+      })
+    },
     CLEAN_CONTAS (state) {
       state.contas = []
     },
@@ -40,6 +61,24 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    salvarCliente: (context, data) => new Promise(resolve => {
+      let dados = data
+      if (data.id === 0) {
+        dados = {
+          ...data,
+          conta_display: data.conta,
+          id: context.state.clientes.length + 1
+        }
+        context.commit('CREATE_CLIENTE', dados)
+      } else {
+        context.commit('UPDATE_CLIENTE', dados)
+      }
+      resolve()
+    }),
+    apagarCliente: (context, data) => new Promise(resolve => {
+      context.commit('DELETE_CLIENTE', data)
+      resolve()
+    }),
     salvarConta: (context, data) => new Promise(resolve => {
       if (data.id === 0) {
         context.commit('UPDATE_CONTA', data)
@@ -91,38 +130,6 @@ export default new Vuex.Store({
           fone: '999999999',
           email: 'william@email.com',
           conta: 1
-        },
-        {
-          id: 13,
-          conta_display: 'William',
-          nome: 'William1',
-          fone: '999999999',
-          email: 'william1@email.com',
-          conta: 1
-        },
-        {
-          id: 14,
-          conta_display: 'William',
-          nome: 'William2',
-          fone: '999999999',
-          email: 'william2@email.com',
-          conta: 1
-        },
-        {
-          id: 15,
-          conta_display: 'Teste',
-          nome: 'William4',
-          fone: '99999999',
-          email: 'william4@email.com',
-          conta: 4
-        },
-        {
-          id: 16,
-          conta_display: 'Teste',
-          nome: 'William4',
-          fone: '99999999',
-          email: 'william4@email.com',
-          conta: 4
         }
       ]
       context.commit('CHANGE_CLIENTES', listaClientes)
