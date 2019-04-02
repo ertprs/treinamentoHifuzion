@@ -22,17 +22,14 @@ export default {
   data () {
     return {
       headers: [
-        { text: 'Nome', value: 'nome' },
-        { text: 'Fone', value: 'fone' },
+        { text: 'Nome', value: 'nome', width: '400' },
+        { text: 'Fone', value: 'fone', width: '200' },
         { text: 'Email', value: 'email' },
-        { text: 'Conta', value: 'conta_display' }
+        { text: 'Conta', value: 'conta_display', width: '200' }
       ]
     }
   },
   computed: {
-    // Alternativa para importar do STORE sem usar ...MAP
-    // clientes: () => this.$store.state.clientes
-
     ...mapState([
       'clientes'
     ])
@@ -43,7 +40,6 @@ export default {
     ])
   },
   mounted () {
-    // this.$store.dispatch('listarClientes')
     this.listarClientes()
   }
 }
