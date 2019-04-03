@@ -143,7 +143,9 @@ import { mapState, mapActions } from 'vuex'
 export default {
   data () {
     return {
-      form: {},
+      form: {
+        id: 0
+      },
       search: '',
       dialog: false,
       headers: [
@@ -181,7 +183,9 @@ export default {
     salvar () {
       this.salvarCliente(this.form).then(
         () => {
-          this.form = {}
+          this.form = {
+            id: 0
+          }
           this.dialog = false
         }
       )

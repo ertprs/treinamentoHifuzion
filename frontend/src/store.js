@@ -63,15 +63,15 @@ export default new Vuex.Store({
   actions: {
     salvarCliente: (context, data) => new Promise(resolve => {
       let dados = data
-      if (data.id === 0) {
+      if ('id' in data) {
+        context.commit('UPDATE_CLIENTE', dados)
+      } else {
         dados = {
           ...data,
           conta_display: data.conta,
           id: context.state.clientes.length + 1
         }
         context.commit('CREATE_CLIENTE', dados)
-      } else {
-        context.commit('UPDATE_CLIENTE', dados)
       }
       resolve()
     }),
@@ -80,7 +80,7 @@ export default new Vuex.Store({
       resolve()
     }),
     salvarConta: (context, data) => new Promise(resolve => {
-      if (data.id === 0) {
+      if ('id' in data) {
         context.commit('UPDATE_CONTA', data)
       } else {
         context.commit('ADD_CONTA', data)
