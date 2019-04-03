@@ -1,5 +1,6 @@
 import '@babel/polyfill'
 import Vue from 'vue'
+import './plugins/axios'
 import './plugins/vuetify'
 import './components'
 import App from './App.vue'
