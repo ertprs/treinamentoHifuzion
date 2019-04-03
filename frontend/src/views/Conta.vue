@@ -167,7 +167,7 @@ export default {
     ]),
     salvarConta () {
       this.isLoading = true
-      this.$store.dispatch('salvarConta', { id: this.contas.length + 1, ...this.form }).then(
+      this.$store.dispatch('salvarConta', this.form).then(
         () => {
           this.form = {}
           this.isLoading = false
@@ -185,7 +185,7 @@ export default {
     },
     confirmRemove () {
       this.isLoading = true
-      this.$store.dispatch('removerConta', this.form).then(
+      this.$store.dispatch('apagarConta', this.form).then(
         () => {
           this.form = {}
           this.isLoading = false
