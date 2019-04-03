@@ -9,6 +9,17 @@ const resultApi = async (context, dispatch, res) => {
   return res.data
 }
 
+const checkError = err => {
+  const data = err.response.data
+  for (let key of Object.keys(data)) {
+    if (Array.isArray(data[key])) {
+      throw (data[key][0])
+    } else {
+      throw (data[key])
+    }
+  }
+}
+
 export default new Vuex.Store({
   state: {
     clientes: [],
@@ -41,22 +52,12 @@ export default new Vuex.Store({
       if ('id' in data && data.id !== 0) {
         return axios.patch(`/contabilidade/clientes/${data.id}/`, data)
           .then(res => resultApi(context, 'listarClientes', res))
+          .catch(checkError)
       }
 
       return axios.post('/contabilidade/clientes/', data)
         .then(res => resultApi(context, 'listarClientes', res))
-        .catch(
-          err => {
-            const data = err.response.data
-            for (let key of Object.keys(data)) {
-              if (Array.isArray(data[key])) {
-                throw (data[key][0])
-              } else {
-                throw (data[key])
-              }
-            }
-          }
-        )
+        .catch(checkError)
     },
     apagarCliente: (context, data) => axios.delete(`/contabilidade/clientes/${data.id}/`)
       .then(res => resultApi(context, 'listarClientes', res)),
