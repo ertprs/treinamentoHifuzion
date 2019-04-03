@@ -60,6 +60,12 @@
         <v-card class="elevation-1 mt-2">
           <v-card-title>
             Formulário de Clientes
+            <v-alert
+              :value="hasError"
+              type="error"
+            >
+              {{errorMessage}}
+            </v-alert>
           </v-card-title>
 
           <v-container grid-list-md>
@@ -120,6 +126,7 @@
               color="red"
               outline
               @click="dialog = false"
+              :loading="isLoading"
             >Cancelar
             </v-btn>
             <v-spacer></v-spacer>
@@ -128,6 +135,7 @@
               color="primary"
               outline
               @click="salvar"
+              :loading="isLoading"
             >Salvar
             </v-btn>
           </v-card-actions>
@@ -139,6 +147,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import { setTimeout } from 'timers'
 
 export default {
   data () {
@@ -146,6 +155,9 @@ export default {
       form: {},
       search: '',
       dialog: false,
+      hasError: false,
+      errorMessage: '',
+      isLoading: false,
       headers: [
         { text: '#', value: 'id', width: '10' },
         { text: 'Nome', value: 'nome', width: '400' },
@@ -179,10 +191,21 @@ export default {
       }
     },
     salvar () {
+      this.isLoading = true
       this.salvarCliente(this.form).then(
         () => {
           this.form = {}
           this.dialog = false
+          this.isLoading = false
+        }
+      ).catch(
+        err => {
+          this.hasError = true
+          this.errorMessage = err
+          setTimeout(() => {
+            this.hasError = false
+            this.isLoading = false
+          }, 3000)
         }
       )
     }

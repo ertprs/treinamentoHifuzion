@@ -45,6 +45,18 @@ export default new Vuex.Store({
 
       return axios.post('/contabilidade/clientes/', data)
         .then(res => resultApi(context, 'listarClientes', res))
+        .catch(
+          err => {
+            const data = err.response.data
+            for (let key of Object.keys(data)) {
+              if (Array.isArray(data[key])) {
+                throw (data[key][0])
+              } else {
+                throw (data[key])
+              }
+            }
+          }
+        )
     },
     apagarCliente: (context, data) => axios.delete(`/contabilidade/clientes/${data.id}/`)
       .then(res => resultApi(context, 'listarClientes', res)),
