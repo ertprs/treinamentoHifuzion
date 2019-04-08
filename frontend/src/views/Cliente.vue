@@ -1,26 +1,26 @@
 <template>
   <div id="clientes">
     <v-alert
-      :value="hasErrorCliente"
+      :value="hasError"
       type="error"
     >
-      {{errorMessageCliente}}
+      {{errorMessage}}
     </v-alert>
 
     <hfz-lista
-      :headers="headersCliente"
+      :headers="headers"
       :items="clientes"
-      :loading="loadingCliente"
+      :loading="loading"
       @reloadItems="reload"
-      @editItem="editCliente"
-      @deleteItem="deleteCliente"
+      @editItem="edit"
+      @deleteItem="remove"
     />
 
     <hfz-form
       ref="form"
       titulo="Formulário de Clientes"
       :api-salvar="salvarCliente"
-      :form="formCliente"
+      :form="form"
       @atualizar="reload"
       @limpar="limparForm"
     >
@@ -38,7 +38,7 @@
             sm8
           >
             <v-text-field
-              v-model="formCliente.nome"
+              v-model="form.nome"
               label="Nome"
               autofocus
             />
@@ -49,7 +49,7 @@
             sm4
           >
             <v-text-field
-              v-model="formCliente.fone"
+              v-model="form.fone"
               label="Fone"
             />
           </v-flex>
@@ -59,7 +59,7 @@
             sm7
           >
             <v-text-field
-              v-model="formCliente.email"
+              v-model="form.email"
               label="Email"
             />
           </v-flex>
@@ -72,7 +72,7 @@
               :items="contas"
               item-value="id"
               item-text="nome"
-              v-model="formCliente.conta"
+              v-model="form.conta"
               label="Conta"
             ></v-select>
           </v-flex>
@@ -92,11 +92,6 @@ export default {
   mixins: [clienteMixIn],
   computed: {
     ...mapState(['contas'])
-  },
-  methods: {
-    abrirModal () {
-      this.$refs.clienteForm.show()
-    }
   },
   mounted () {
     this.$store.dispatch('listarContas')

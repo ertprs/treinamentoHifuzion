@@ -1,14 +1,11 @@
 import { mapState, mapActions } from 'vuex'
 
-const clienteMixIn = {
+const contaMixIn = {
   data () {
     return {
       headers: [
         { text: '#', value: 'id', width: '10' },
         { text: 'Nome', value: 'nome', width: '400' },
-        { text: 'Fone', value: 'fone', width: '200' },
-        { text: 'Email', value: 'email' },
-        { text: 'Conta', value: 'conta_display', width: '200' },
         { text: 'Opções', value: '', width: '10', sortable: false }
       ],
       loading: false,
@@ -20,21 +17,21 @@ const clienteMixIn = {
   },
   computed: {
     ...mapState([
-      'clientes'
+      'contas'
     ])
   },
   methods: {
     ...mapActions([
-      'listarClientes',
-      'salvarCliente',
-      'apagarCliente'
+      'listarContas',
+      'salvarConta',
+      'apagarConta'
     ]),
     limparForm () {
       this.form = {}
     },
     reload () {
       this.loading = true
-      this.listarClientes().then(
+      this.listarContas().then(
         () => { this.loading = false }
       ).catch(
         err => {
@@ -49,12 +46,12 @@ const clienteMixIn = {
     },
     remove (item) {
       if (confirm(`Tem certeza que quer apagar o cliente ${item.nome}?`)) {
-        this.apagarCliente(item)
+        this.apagarConta(item)
       }
     },
     salvar () {
       this.loading = true
-      this.salvarCliente(this.form).then(
+      this.salvarConta(this.form).then(
         () => {
           this.form = {}
           this.dialog = false
@@ -77,4 +74,4 @@ const clienteMixIn = {
   }
 }
 
-export default clienteMixIn
+export default contaMixIn
