@@ -32,16 +32,16 @@ const clienteMixIn = {
     limparForm () {
       this.form = {}
     },
-    reload () {
-      this.loading = true
-      this.listarClientes().then(
-        () => { this.loading = false }
-      ).catch(
-        err => {
-          this.hasError = true
-          this.errorMessage = err
-        }
-      )
+    async reload () {
+      try {
+        this.loading = true
+        await this.listarClientes()
+        this.loading = false
+      } catch (err) {
+        this.loading = false
+        this.hasError = true
+        this.errorMessage = err
+      }
     },
     edit (item) {
       this.form = item
