@@ -29,6 +29,9 @@ const clienteMixIn = {
       'salvarCliente',
       'apagarCliente'
     ]),
+    limparForm () {
+      this.formCliente = {}
+    },
     reload () {
       this.loadingCliente = true
       this.listarClientes().then(
@@ -71,6 +74,13 @@ const clienteMixIn = {
   },
   mounted () {
     this.reload()
+  },
+  watch: {
+    dialogCliente (value) {
+      if (value === false) {
+        this.limparForm()
+      }
+    }
   }
 }
 
