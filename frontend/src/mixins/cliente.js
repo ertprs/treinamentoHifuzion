@@ -45,7 +45,7 @@ const clienteMixIn = {
     },
     editCliente (cliente) {
       this.formCliente = cliente
-      this.dialogCliente = true
+      this.$refs.form.show()
     },
     deleteCliente (cliente) {
       if (confirm(`Tem certeza que quer apagar o cliente ${cliente.nome}?`)) {
@@ -74,13 +74,6 @@ const clienteMixIn = {
   },
   mounted () {
     this.reload()
-  },
-  watch: {
-    dialogCliente (value) {
-      if (value === false) {
-        this.limparForm()
-      }
-    }
   }
 }
 
