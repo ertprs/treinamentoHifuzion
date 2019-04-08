@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from hifuzion.contabilidade.serializers import ClienteSerializer, PlanoContaSerializer
-from hifuzion.contabilidade.models import Cliente, PlanoConta
+from hifuzion.contabilidade.serializers import ClienteSerializer, PlanoContaSerializer, TodoSerializer
+from hifuzion.contabilidade.models import Cliente, PlanoConta, Todo
 
 
 class ClienteViewSet(viewsets.ModelViewSet):
@@ -14,3 +14,8 @@ class PlanoContaViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         return super().create(request, *args, **kwargs)
+
+
+class TodoViewSet(viewsets.ModelViewSet):
+    queryset = Todo.objects.all()
+    serializer_class = TodoSerializer
