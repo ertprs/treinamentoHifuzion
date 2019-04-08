@@ -9,6 +9,19 @@ const resultApi = async (context, dispatch, res) => {
   return res.data
 }
 
+const parseError = error => {
+  if (error.response) {
+    if (error.response.status === 401) {
+      return `Você não tem permissão para continuar!`
+    } else {
+      return error.response.data
+    }
+  } else if (error.request) {
+    return error.request
+  }
+  return error.message
+}
+
 const checkError = err => {
   const data = err.response.data
   for (let key of Object.keys(data)) {
@@ -45,7 +58,7 @@ export default new Vuex.Store({
       .catch(
         err => {
           context.commit('CLEAN_CLIENTES')
-          console.error('Ocorreu um erro na requisição. Erro:', err)
+          throw new Error(parseError(err))
         }
       ),
     salvarCliente: (context, data) => {
