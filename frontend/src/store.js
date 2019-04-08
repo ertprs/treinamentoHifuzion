@@ -36,7 +36,9 @@ const checkError = err => {
 export default new Vuex.Store({
   state: {
     clientes: [],
-    contas: []
+    contas: [],
+    cliente: null,
+    todos: []
   },
   mutations: {
     CLEAN_CLIENTES (state) {
@@ -45,14 +47,45 @@ export default new Vuex.Store({
     CHANGE_CLIENTES (state, clientes) {
       state.clientes = clientes
     },
+    SELECT_CLIENTE (state, cliente = null) {
+      state.cliente = cliente
+    },
     CLEAN_CONTAS (state) {
       state.contas = []
     },
     CHANGE_CONTAS (state, contas) {
       state.contas = contas
+    },
+    CLEAN_TODOS (state) {
+      state.todos = []
+    },
+    CHANGE_TODOS (state, todos) {
+      state.todos = todos
     }
   },
   actions: {
+    carregarCliente: (context, id) => {
+      return axios.get(`/contabilidade/clientes/${id}`).then(
+        res => {
+          context.commit('SELECT_CLIENTE', res.data)
+        }
+      ).catch(
+        err => {
+          context.commit('SELECT_CLIENTE')
+          throw new Error(parseError(err))
+        }
+      )
+    },
+    listarTodos: (context, id) => axios.get('/contabilidade/todos/', { params: { cliente: id } })
+      .then(res => context.commit('CHANGE_TODOS', res.data))
+      .catch(
+        err => {
+          context.commit('CLEAN_TODOS')
+          throw new Error(parseError(err))
+        }
+      ),
+    salvarTodo: (context, todo) => axios.post('/contabilidade/todos/', todo),
+    finalizarTodo: (context, id) => axios.post(`/contabilidade/todos/${id}/finalizar/`, {}),
     listarClientes: context => axios.get('/contabilidade/clientes/')
       .then(res => context.commit('CHANGE_CLIENTES', res.data))
       .catch(

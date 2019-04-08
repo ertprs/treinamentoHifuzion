@@ -26,3 +26,7 @@ class Todo(models.Model):
 
     def __str__(self):
         return self.nota
+
+    def finalizar(self):
+        self.finalizado = True
+        self.save()

@@ -45,6 +45,7 @@
             <!-- Opções -->
             <template v-if="headers.filter(h => !h.value).length > 0">
               <td class="justify-center layout pa-3">
+                <hfz-todo :cliente-id="props.item.id"></hfz-todo>
                 <v-icon
                   small
                   class="mr-2"
