@@ -11,6 +11,8 @@
       :headers="headers"
       :items="clientes"
       :loading="loading"
+      :hasTodo="true"
+      todoKey="id"
       @reloadItems="reload"
       @editItem="edit"
       @deleteItem="remove"
