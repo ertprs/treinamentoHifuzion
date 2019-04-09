@@ -19,12 +19,12 @@ const clienteMixIn = {
     }
   },
   computed: {
-    ...mapState([
+    ...mapState('cliente', [
       'clientes'
     ])
   },
   methods: {
-    ...mapActions([
+    ...mapActions('cliente', [
       'listarClientes',
       'salvarCliente',
       'apagarCliente'

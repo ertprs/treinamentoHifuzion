@@ -117,11 +117,14 @@ export default {
     }
   },
   computed: {
-    ...mapState(['cliente', 'todos'])
+    ...mapState('cliente', ['cliente']),
+    ...mapState('todo', ['todos'])
   },
   methods: {
-    ...mapActions([
-      'carregarCliente',
+    ...mapActions('cliente', [
+      'carregarCliente'
+    ]),
+    ...mapActions('todo', [
       'listarTodos',
       'salvarTodo',
       'finalizarTodo'

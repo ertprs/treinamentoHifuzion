@@ -93,10 +93,10 @@ import { mapState } from 'vuex'
 export default {
   mixins: [clienteMixIn],
   computed: {
-    ...mapState(['contas'])
+    ...mapState('conta', ['contas'])
   },
   mounted () {
-    this.$store.dispatch('listarContas')
+    this.$store.dispatch('conta/listarContas')
   }
 }
 </script>

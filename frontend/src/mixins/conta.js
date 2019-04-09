@@ -16,12 +16,12 @@ const contaMixIn = {
     }
   },
   computed: {
-    ...mapState([
+    ...mapState('conta', [
       'contas'
     ])
   },
   methods: {
-    ...mapActions([
+    ...mapActions('conta', [
       'listarContas',
       'salvarConta',
       'apagarConta'
