@@ -30,7 +30,9 @@ THIRD_APPS = [
     'django_extensions',
 ]
 
-LOCAL_APPS = []
+LOCAL_APPS = [
+    'docsapp.core',
+]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_APPS + LOCAL_APPS
 
