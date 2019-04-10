@@ -1,5 +1,5 @@
 import axios from '../plugins/axios'
-import hooks from './hooks'
+import { parseError } from './hooks'
 
 const namespaced = true
 const state = {
@@ -19,7 +19,7 @@ const actions = {
     .catch(
       err => {
         context.commit('CLEAN_TODOS')
-        throw new Error(hooks.parseError(err))
+        throw new Error(parseError(err))
       }
     ),
   salvarTodo: (context, todo) => axios.post('/contabilidade/todos/', todo),

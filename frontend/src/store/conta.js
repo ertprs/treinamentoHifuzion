@@ -1,5 +1,5 @@
 import axios from '../plugins/axios'
-import hooks from './hooks'
+import { resultApi } from './hooks'
 
 const namespaced = true
 const state = {
@@ -25,14 +25,14 @@ const actions = {
   salvarConta: (context, data) => {
     if ('id' in data && data.id !== 0) {
       return axios.patch(`/contabilidade/contas/${data.id}/`, data)
-        .then(res => hooks.resultApi(context, 'listarContas', res))
+        .then(res => resultApi(context, 'listarContas', res))
     }
 
     return axios.post('/contabilidade/contas/', data)
-      .then(res => hooks.resultApi(context, 'listarContas', res))
+      .then(res => resultApi(context, 'listarContas', res))
   },
   apagarConta: (context, data) => axios.delete(`/contabilidade/contas/${data.id}/`)
-    .then(res => hooks.resultApi(context, 'listarContas', res))
+    .then(res => resultApi(context, 'listarContas', res))
 }
 
 export default {

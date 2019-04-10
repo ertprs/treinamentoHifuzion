@@ -1,5 +1,5 @@
 import axios from '../plugins/axios'
-import hooks from './hooks'
+import { commitDefault, parseData } from './hooks'
 
 const namespaced = true
 
@@ -10,7 +10,7 @@ const state = {
 }
 
 const mutations = {
-  APPLY: hooks.commitDefault
+  APPLY: commitDefault
 }
 
 const actions = {
@@ -21,7 +21,7 @@ const actions = {
   load: (context, payload) => {
     console.log(payload)
     return axios.get(payload.url, payload.fiters)
-      .then(data => hooks.parseData(context, payload, data.data))
+      .then(data => parseData(context, payload, data.data))
   }
 }
 

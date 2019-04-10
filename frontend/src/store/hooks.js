@@ -57,7 +57,7 @@ const commitDefault = (state, payload) => {
 const loadApi = (context, payload) => axios.get(payload.url, payload.fiters)
   .then(data => parseData(context, payload, data.data))
 
-export default {
+export {
   resultApi,
   parseError,
   checkError,
