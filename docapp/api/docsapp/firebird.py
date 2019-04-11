@@ -1,14 +1,15 @@
 import fdb
+from decouple import config
 
 
 class FirebirdConnector:
     CHARSET = 'utf-8'
 
-    def __init__(self, host, database, user, password):
-        self.host = host
-        self.database = database
-        self.user = user
-        self.password = password
+    def __init__(self, **kwargs):
+        self.host = kwargs.get('host', config('FB_HOST'))
+        self.database = kwargs.get('database', config('FB_DATABASE'))
+        self.user = kwargs.get('user', config('FB_USER'))
+        self.password = kwargs.get('password', config('FB_PASSWORD'))
         self.connection: fdb.connect = None
 
         self.connect()
@@ -23,11 +24,6 @@ class FirebirdConnector:
             user=self.user,
             password=self.password,
             charset=self.CHARSET
-        )
-
-    def select_fake(self):
-        return eval(
-
         )
 
     def select_all(self, table):

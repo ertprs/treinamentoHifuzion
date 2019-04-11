@@ -19,6 +19,7 @@ djangorestframework = "*"
 psycopg2 = "*"
 fdb = "*"
 pillow = "*"
+werkzeug = "*"
 
 [requires]
 python_version = "3.7"
