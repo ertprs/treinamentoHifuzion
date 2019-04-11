@@ -32,6 +32,7 @@ THIRD_APPS = [
 
 LOCAL_APPS = [
     'docsapp.core',
+    'docsapp.integracao',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_APPS + LOCAL_APPS

@@ -17,6 +17,8 @@ django-filter = "*"
 django-rest-auth = "*"
 djangorestframework = "*"
 psycopg2 = "*"
+fdb = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.7"
