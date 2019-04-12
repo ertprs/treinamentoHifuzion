@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.translation import gettext as _
 
+from docsapp.integracao.models import Documento
+
 
 class Profile(models.Model):
     """
@@ -17,6 +19,18 @@ class Profile(models.Model):
         null=True,
         blank=True
     )
+
+    @property
+    def documents(self):
+        return list(Documento.objects.all().values(
+            'id',
+            'data_reg',
+            'documento',
+            'empresa',
+            'caixa',
+            'prateleira',
+            'sessao',
+        ))
 
     class Meta:
         verbose_name = _('profile')
