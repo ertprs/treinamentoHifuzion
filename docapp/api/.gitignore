@@ -6,3 +6,5 @@
 .env
 *.sqlite3
 00*
+*ipynb
+.ipynb_checkpoints

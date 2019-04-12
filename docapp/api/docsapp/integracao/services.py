@@ -1,5 +1,3 @@
-from decouple import config
-from django.db import IntegrityError
 from django.utils import timezone
 
 from docsapp.firebird import FirebirdConnector
@@ -23,17 +21,17 @@ class DocumentIntegration:
         try:
             FROM_TO_ENTITY = dict()
             FROM_TO_ENTITY['documento'] = Documento
-    
+
             data['integracao_status'] = BaseIntegracao.INTEGRADA
             data['integracao_finalizada'] = timezone.now()
-    
+
             if entity == 'documento':
                 if data['tipo'] is None:
                     data['tipo'] = Documento.ENTRADA
-    
+
             doc = FROM_TO_ENTITY[entity].objects.filter(id=data['id'])
-    
-            if doc.exists():
+
+            if not doc.exists():
                 self.bulk_list.append(Documento(**data))
             else:
                 Documento.objects.filter(id=data['id']).update(**data)

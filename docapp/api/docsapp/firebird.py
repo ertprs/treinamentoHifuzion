@@ -11,6 +11,7 @@ class FirebirdConnector:
         self.user = kwargs.get('user', config('FB_USER'))
         self.password = kwargs.get('password', config('FB_PASSWORD'))
         self.connection: fdb.connect = None
+        self.columns = []
 
         self.connect()
 
@@ -32,8 +33,8 @@ class FirebirdConnector:
         """
         cursor = self.connection.cursor()
         cursor.execute(f'SELECT * FROM {table}', None)
-        columns = [col[0].lower() for col in cursor.description]
-        return [dict(zip(columns, row)) for row in cursor.fetchall()]
+        self.columns = [col[0].lower() for col in cursor.description]
+        return [dict(zip(self.columns, row)) for row in cursor.fetchall()]
 
     def get(self, query, params=None):
         """
@@ -41,8 +42,8 @@ class FirebirdConnector:
         """
         cursor = self.connection.cursor()
         cursor.execute(query, params)
-        columns = [col[0].lower() for col in cursor.description]
-        return [dict(zip(columns, row)) for row in cursor.fetchall()]
+        self.columns = [col[0].lower() for col in cursor.description]
+        return [dict(zip(self.columns, row)) for row in cursor.fetchall()]
 
 # Doc
 # https://fdb.readthedocs.io/en/v2.0/getting-started.html#quick-start-guide
