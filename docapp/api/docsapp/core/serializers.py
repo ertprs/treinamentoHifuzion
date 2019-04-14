@@ -1,7 +1,31 @@
+from django.contrib.auth.models import User
 from django.db.models import QuerySet
+from rest_auth.models import TokenModel
+from rest_auth.serializers import LoginSerializer, UserDetailsSerializer, TokenSerializer
 from rest_framework import serializers
 
 from .models import Profile
+
+
+class CustomUserSerializer(UserDetailsSerializer):
+    profile = serializers.SerializerMethodField()
+
+    def get_profile(self, user: User):
+        return ProfileSerializer(user.profile).data
+
+    class Meta(UserDetailsSerializer.Meta):
+        fields = ('profile',)
+
+
+class CustomTokenSerializer(serializers.ModelSerializer):
+    profile = serializers.SerializerMethodField()
+
+    def get_profile(self, token: TokenModel):
+        return ProfileSerializer(token.user.profile).data
+
+    class Meta:
+        model = TokenModel
+        fields = ('key', 'profile')
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -10,7 +34,8 @@ class ProfileSerializer(serializers.ModelSerializer):
     """
 
     user_info = serializers.SerializerMethodField()
-    documents = serializers.SerializerMethodField()
+
+    # documents = serializers.SerializerMethodField()
 
     def get_documents(self, profile: Profile) -> list:
         """

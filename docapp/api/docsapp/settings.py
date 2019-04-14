@@ -3,7 +3,6 @@ import os
 from decouple import config, Csv
 from dj_database_url import parse
 
-
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = config('SECRET_KEY')
@@ -40,7 +39,19 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_APPS + LOCAL_APPS
 CORS_ORIGIN_ALLOW_ALL = True
 
 REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+    ),
     'COERCE_DECIMAL_TO_STRING': False,
+}
+
+REST_AUTH_SERIALIZERS = {
+    'TOKEN_SERIALIZER': 'docsapp.core.serializers.CustomTokenSerializer',
+    'USER_DETAILS_SERIALIZER': 'docsapp.core.serializers.CustomUserSerializer',
 }
 
 MIDDLEWARE = [
