@@ -1,17 +1,21 @@
 <template>
   <v-app id="docsapp">
-    <hfz-menu title="AppDocs" :menus="menus"/>
-    <v-content>
-      <v-container fluid fill-height>
-        <v-layout justify-center align-center>
+    <template v-if="isAuthenticated">
+      <hfz-menu title="AppDocs" :menus="menus"/>
+      <v-content>
+        <v-container fluid grid-list-md>
           <router-view/>
-        </v-layout>
-      </v-container>
-    </v-content>
+        </v-container>
+      </v-content>
+    </template>
+    <template v-else>
+      <router-view/>
+    </template>
   </v-app>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
@@ -28,6 +32,11 @@ export default {
         }
       ]
     }
+  },
+  computed: {
+    ...mapGetters('auth', [
+      'isAuthenticated'
+    ])
   }
 }
 </script>

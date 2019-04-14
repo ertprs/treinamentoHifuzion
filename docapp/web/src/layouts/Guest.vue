@@ -1,0 +1,22 @@
+<template>
+  <v-app id="login" dark>
+    <v-container
+      fluid
+      fill-height
+    >
+      <v-layout
+        justify-center
+        align-center
+      >
+        <v-flex
+          xs12
+          sm6
+          md4
+          lg3
+        >
+          <slot></slot>
+        </v-flex>
+      </v-layout>
+    </v-container>
+  </v-app>
+</template>
