@@ -10,6 +10,8 @@ class CustomUserSerializer(serializers.ModelSerializer):
     profile = serializers.SerializerMethodField()
 
     def get_profile(self, user: User):
+        if not hasattr(user, 'profile'):
+            return {}
         return ProfileSerializer(user.profile).data
 
     class Meta:
@@ -25,6 +27,8 @@ class CustomTokenSerializer(serializers.ModelSerializer):
         return token.key
 
     def get_profile(self, token: TokenModel):
+        if not hasattr(token.user, 'profile'):
+            return {}
         return ProfileSerializer(token.user.profile).data
 
     class Meta:
