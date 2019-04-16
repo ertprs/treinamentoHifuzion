@@ -18,7 +18,7 @@ export default {
         { para: 'cliente', icone: 'supervised_user_circle' },
         { para: 'conta', icone: 'featured_play_list' },
         { para: 'usuario', icone: 'account_circle' },
-        { para: 'logoff', icone: 'close' }
+        { para: 'logout', icone: 'close' }
       ]
     }
   }

@@ -22,6 +22,11 @@ _axios.interceptors.response.use(
     return response
   },
   function (error) {
+    if (error.response.status === 401) {
+      // remove o token do headers
+      // vai para login
+      // passa um erro pro login
+    }
     // Do something with response error
     return Promise.reject(error)
   }
