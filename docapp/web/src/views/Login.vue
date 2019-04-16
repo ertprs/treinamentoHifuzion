@@ -37,6 +37,7 @@
           <v-alert
             :value="error.has"
             color="error"
+            class="mb-2"
           >
             {{error.message}}
           </v-alert>
@@ -73,7 +74,7 @@
 </template>
 
 <script>
-import { setTimeout } from 'timers'
+import { mapActions } from 'vuex'
 export default {
   data () {
     return {
@@ -99,12 +100,21 @@ export default {
     }
   },
   methods: {
+    ...mapActions('auth', [
+      'authLogin'
+    ]),
     login () {
       this.loading = true
-      setTimeout(() => {
-        console.log('Chamou o login')
-        this.loading = false
-      }, 3000)
+      this.authLogin(this.credentials)
+        .then(res => {
+          this.$router.push('/')
+          self.loading = false
+        })
+        .catch(err => {
+          this.error.has = true
+          this.error.message = err
+          this.loading = false
+        })
     }
   },
   mounted () {
