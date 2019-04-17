@@ -1,6 +1,7 @@
 <template>
   <v-app id="admin">
-    <hfz-menu titulo="DocsApp" :menus="menus"/>
+        <hfz-menu title="DocsApp" :menus="$store.state.menu.menus"/>
+<!--    <hfz-menu title="DocsApp" :menus="menus"/>-->
 
     <v-content>
       <v-container fluid>
@@ -12,15 +13,8 @@
 
 <script>
 export default {
-  data () {
-    return {
-      menus: [
-        { para: 'cliente', icone: 'supervised_user_circle' },
-        { para: 'conta', icone: 'featured_play_list' },
-        { para: 'usuario', icone: 'account_circle' },
-        { para: 'logout', icone: 'close' }
-      ]
-    }
+  mounted () {
+    this.$store.dispatch('menu/getMenus')
   }
 }
 </script>

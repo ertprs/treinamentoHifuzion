@@ -3,7 +3,7 @@ from django.db.models import QuerySet
 from rest_auth.models import TokenModel
 from rest_framework import serializers
 
-from .models import Profile
+from .models import Profile, Menu
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -42,6 +42,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     """
 
     user_info = serializers.SerializerMethodField()
+
     # documents = serializers.SerializerMethodField()
 
     def get_documents(self, profile: Profile) -> list:
@@ -73,4 +74,20 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
+        fields = '__all__'
+
+
+class MenuSerializer(serializers.ModelSerializer):
+    """
+    Serializer for Menu model
+    """
+
+    submenu = serializers.SerializerMethodField()
+
+    def get_submenu(self, menu: Menu):
+        data = Menu.objects.filter(relation=menu.id)
+        return MenuSerializer(data, many=True).data
+
+    class Meta:
+        model = Menu
         fields = '__all__'

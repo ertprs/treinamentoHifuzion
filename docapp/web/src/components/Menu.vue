@@ -1,24 +1,47 @@
 <template>
   <v-toolbar :clipped-left="$vuetify.breakpoint.lgAndUp" color="primary" dark app fixed>
-    <v-toolbar-title class="ml-0 pl-3">
-      <span class="hidden-sm-and-down">{{ titulo }}</span>
-    </v-toolbar-title>
     <v-btn icon to="/">
       <v-icon>home</v-icon>
     </v-btn>
-
+    <v-toolbar-title class="ml-0 pl-3">
+      <span class="hidden-sm-and-down">{{ title }}</span>
+    </v-toolbar-title>
     <v-spacer></v-spacer>
 
-    <v-btn icon :to="menu.para" v-for="menu in menus" :key="menu.para">
-      <v-icon>{{menu.icone}}</v-icon>
-    </v-btn>
+    <template v-for="menu in menus">
+      <v-btn icon  :key="menu.to" :to="menu.to" v-if="!menu.submenu.length">
+        <v-icon>{{menu.icon}}</v-icon>
+      </v-btn>
+
+      <v-menu offset-y open-on-hover :key="menu.to" v-else>
+        <template v-slot:activator="{ on }">
+          <v-btn
+            icon
+            v-on="on"
+          >
+            <v-icon>done</v-icon>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-tile
+            v-for="submenu in menu.submenu"
+            :key="submenu.to"
+            :to="submenu.to"
+          >
+            <v-list-tile-title>
+              <v-icon>{{submenu.icon}}</v-icon>
+            </v-list-tile-title>
+          </v-list-tile>
+        </v-list>
+      </v-menu>
+    </template>
   </v-toolbar>
 </template>
 
 <script>
 export default {
   props: {
-    titulo: {
+    title: {
       type: String,
       required: true
     },
