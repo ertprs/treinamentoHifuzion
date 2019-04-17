@@ -76,14 +76,6 @@
 <script>
 import { mapActions } from 'vuex'
 export default {
-  watch: {
-    message (value) {
-      if (value) {
-        this.error.has = true
-        this.error.message = value
-      }
-    }
-  },
   data () {
     return {
       message: '',
@@ -124,6 +116,14 @@ export default {
           this.error.message = err
           this.loading = false
         })
+    }
+  },
+  watch: {
+    message (value) {
+      if (value) {
+        this.error.has = true
+        this.error.message = value
+      }
     }
   },
   mounted () {

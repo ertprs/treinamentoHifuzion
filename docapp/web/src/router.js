@@ -10,7 +10,10 @@ const router = new Router({
     {
       path: '/login',
       name: 'login',
-      component: () => import('./views/Login.vue')
+      component: () => import('./views/Login.vue'),
+      meta: {
+        requiresAuth: false
+      }
     },
     {
       path: '/logout',
@@ -18,6 +21,9 @@ const router = new Router({
       beforeEnter: (to, from, next) => {
         store.dispatch('auth/authLogout')
         next('/login')
+      },
+      meta: {
+        requiresAuth: false
       }
     },
     {
@@ -28,21 +34,18 @@ const router = new Router({
     {
       path: '/about',
       name: 'about',
-      component: () => import('./views/About.vue'),
-      meta: {
-        requiresAuth: true
-      }
+      component: () => import('./views/About.vue')
     }
   ]
 })
 
 // Router Guard
 router.beforeEach(async (to, from, next) => {
-  try {
+  if (to.matched.some(record => typeof record.meta.requiresAuth === 'undefined' ? true : record.meta.requiresAuth)) {
     await store.dispatch('auth/authCheck')
     next()
-  } catch (err) {
-    next('/login')
+  } else {
+    next()
   }
 })
 

@@ -1,4 +1,4 @@
-const addHttpToken = (http, token = null) => {
+const httpToken = (http, token = null) => {
   delete http.defaults.headers['Authorization']
   if (token !== null) {
     http.defaults.headers['Authorization'] = 'Token ' + token
@@ -6,5 +6,5 @@ const addHttpToken = (http, token = null) => {
 }
 
 export {
-  addHttpToken
+  httpToken
 }

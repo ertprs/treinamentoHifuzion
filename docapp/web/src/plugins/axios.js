@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { addHttpToken } from '../store/hooks'
 import store from '../store'
 import router from '../router'
 
@@ -26,7 +25,6 @@ _axios.interceptors.response.use(
   },
   function (error) {
     if (error.response.status === 401) {
-      addHttpToken(_axios)
       store.commit('auth/LOGOUT')
       router.push({ path: '/login', query: { message: 'Sua sessão expirou' } })
       return
