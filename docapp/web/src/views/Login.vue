@@ -76,8 +76,17 @@
 <script>
 import { mapActions } from 'vuex'
 export default {
+  watch: {
+    message (value) {
+      if (value) {
+        this.error.has = true
+        this.error.message = value
+      }
+    }
+  },
   data () {
     return {
+      message: '',
       form: false,
       loading: false,
       error: {
@@ -119,6 +128,7 @@ export default {
   },
   mounted () {
     this.$refs.form.validate()
+    this.message = this.$route.query.message
   }
 }
 </script>

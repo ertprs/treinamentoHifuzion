@@ -1,4 +1,7 @@
 import axios from 'axios'
+import { addHttpToken } from '../store/hooks'
+import store from '../store'
+import router from '../router'
 
 const _axios = axios.create({
   baseURL: 'http://localhost:8000/'
@@ -23,9 +26,10 @@ _axios.interceptors.response.use(
   },
   function (error) {
     if (error.response.status === 401) {
-      // remove o token do headers
-      // vai para login
-      // passa um erro pro login
+      addHttpToken(_axios)
+      store.commit('auth/LOGOUT')
+      router.push({ path: '/login', query: { message: 'Sua sessão expirou' } })
+      return
     }
     // Do something with response error
     return Promise.reject(error)

@@ -1,4 +1,5 @@
 import http from '../plugins/axios'
+import { addHttpToken } from './hooks'
 
 const namespaced = true
 
@@ -7,25 +8,18 @@ const state = {
   profile: {}
 }
 
-const addHttpToken = (token = null) => {
-  delete http.defaults.headers['Authorization']
-  if (token !== null) {
-    http.defaults.headers['Authorization'] = 'Token ' + token
-  }
-}
-
 const mutations = {
   LOGIN (state, payload) {
     state.token = payload.token
     state.profile = payload.profile
 
-    addHttpToken(payload.token)
+    addHttpToken(http, payload.token)
   },
   LOGOUT (state) {
     state.token = null
     state.profile = {}
 
-    addHttpToken()
+    addHttpToken(http)
   },
   CHECK (state, payload) {
     state.profile = payload.profile
@@ -44,7 +38,7 @@ const actions = {
     .then(res => context.commit('LOGOUT'))
     .catch(() => context.commit('LOGOUT')),
   authCheck: context => {
-    addHttpToken(context.rootState.auth.token)
+    addHttpToken(http, context.rootState.auth.token)
   }
 }
 
