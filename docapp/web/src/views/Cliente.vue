@@ -80,7 +80,6 @@
         </v-layout>
       </v-container>
     </hfz-form>
-
   </div>
 </template>
 
