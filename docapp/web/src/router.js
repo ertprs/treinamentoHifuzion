@@ -6,6 +6,7 @@ import store from './store'
 Vue.use(Router)
 
 const router = new Router({
+  mode: 'history',
   routes: [
     {
       path: '/login',
@@ -30,6 +31,11 @@ const router = new Router({
       path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/cliente',
+      name: 'cliente',
+      component: () => import('./views/Cliente.vue')
     },
     {
       path: '*',

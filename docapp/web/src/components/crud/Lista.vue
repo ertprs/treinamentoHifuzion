@@ -45,10 +45,6 @@
             <!-- Opções -->
             <template v-if="headers.filter(h => !h.value).length > 0">
               <td class="justify-center layout pa-3">
-                <hfz-todo
-                  :cliente-id="props.item[todoKey]"
-                  v-if="hasTodo"
-                />
                 <v-icon
                   small
                   class="mr-2"
@@ -86,14 +82,6 @@ export default {
     loading: {
       type: Boolean,
       default: false
-    },
-    hasTodo: {
-      type: Boolean,
-      default: false
-    },
-    todoKey: {
-      type: String,
-      default: 'id'
     }
   },
   data () {

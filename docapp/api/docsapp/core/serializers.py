@@ -3,7 +3,7 @@ from django.db.models import QuerySet
 from rest_auth.models import TokenModel
 from rest_framework import serializers
 
-from .models import Profile, Menu
+from .models import Profile, Menu, Client
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -91,3 +91,18 @@ class MenuSerializer(serializers.ModelSerializer):
     class Meta:
         model = Menu
         fields = ('to', 'icon', 'submenu')
+
+
+class ClientSerializer(serializers.ModelSerializer):
+    """
+    Serializer fror Client model
+    """
+
+    type_person_display = serializers.SerializerMethodField()
+
+    def get_type_person_display(self, client: Client):
+        return client.get_type_person_display()
+
+    class Meta:
+        model = Client
+        fields = '__all__'
