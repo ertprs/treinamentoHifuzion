@@ -7,7 +7,7 @@ const state = {
 }
 
 const mutations = {
-  APPLY (state, payload) {
+  APPLY (state, payload = []) {
     state.menus = payload
   }
 }
@@ -15,6 +15,7 @@ const mutations = {
 const actions = {
   getMenus: context => http.get('/core/menus/')
     .then(res => context.commit('APPLY', res.data))
+    .catch(() => context.commit('APPLY'))
 }
 
 export default { namespaced, state, mutations, actions }

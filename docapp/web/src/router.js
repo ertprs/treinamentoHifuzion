@@ -30,6 +30,14 @@ const router = new Router({
       path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: '*',
+      name: 'notfound',
+      component: () => import('./views/NotExists.vue'),
+      meta: {
+        requiresAuth: false
+      }
     }
   ]
 })

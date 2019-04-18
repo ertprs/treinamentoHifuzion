@@ -26,8 +26,7 @@ _axios.interceptors.response.use(
   function (error) {
     if (error.response.status === 401) {
       store.commit('auth/LOGOUT')
-      router.push({ path: '/login', query: { message: 'Sua sessão expirou' } })
-      return
+      router.push('/login')
     }
     // Do something with response error
     return Promise.reject(error)

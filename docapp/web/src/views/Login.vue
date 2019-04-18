@@ -66,7 +66,8 @@
             type="submit"
             :disabled="!form"
             :loading="loading"
-          >Login</v-btn>
+          >Login
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-form>
@@ -74,11 +75,11 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
+
 export default {
   data () {
     return {
-      message: '',
       form: false,
       loading: false,
       error: {
@@ -100,6 +101,11 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapState('auth', [
+      'errorMessage'
+    ])
+  },
   methods: {
     ...mapActions('auth', [
       'authLogin'
@@ -118,17 +124,12 @@ export default {
         })
     }
   },
-  watch: {
-    message (value) {
-      if (value) {
-        this.error.has = true
-        this.error.message = value
-      }
-    }
-  },
   mounted () {
     this.$refs.form.validate()
-    this.message = this.$route.query.message
+    if (this.errorMessage) {
+      this.error.has = true
+      this.error.message = this.errorMessage
+    }
   }
 }
 </script>
