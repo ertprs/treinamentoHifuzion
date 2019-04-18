@@ -1,6 +1,5 @@
 import axios from 'axios'
 import store from '../store'
-import router from '../router'
 
 const _axios = axios.create({
   baseURL: 'http://localhost:8000/'
@@ -26,7 +25,6 @@ _axios.interceptors.response.use(
   function (error) {
     if (error.response.status === 401) {
       store.commit('auth/LOGOUT')
-      router.push('/login')
     }
     // Do something with response error
     return Promise.reject(error)

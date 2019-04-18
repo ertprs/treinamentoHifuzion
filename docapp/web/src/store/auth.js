@@ -6,7 +6,8 @@ const namespaced = true
 const state = {
   token: null,
   profile: {},
-  errorMessage: null
+  errorMessage: null,
+  returnTo: null
 }
 
 const mutations = {
@@ -17,6 +18,8 @@ const mutations = {
     httpToken(http, payload.token)
   },
   LOGOUT (state) {
+    state.returnTo = null
+    state.errorMessage = null
     state.token = null
     state.profile = {}
 
@@ -27,6 +30,9 @@ const mutations = {
   },
   ADD_ERROR (state, payload) {
     state.errorMessage = payload
+  },
+  ADD_RETURN (state, payload) {
+    state.returnTo = payload
   }
 }
 
@@ -43,7 +49,7 @@ const actions = {
     .catch(() => context.commit('LOGOUT')),
   authCheck: context => {
     httpToken(http, context.rootState.auth.token)
-    return http.get('/rest-auth/user/').then(res => context.commit('CHECK', res.data)).catch(err => context.commit('ADD_ERROR', err.response.data.detail))
+    return http.get('/rest-auth/user/').then(res => context.commit('CHECK', res.data))
   }
 }
 
