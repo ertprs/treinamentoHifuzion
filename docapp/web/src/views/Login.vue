@@ -129,6 +129,7 @@ export default {
     if (this.errorMessage) {
       this.error.has = true
       this.error.message = this.errorMessage
+      this.$store.commit('auth/ADD_ERROR')
     }
   }
 }

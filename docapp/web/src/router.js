@@ -54,8 +54,6 @@ router.beforeEach(async (to, from, next) => {
         next()
       }
     } catch (e) {
-      store.commit('auth/LOGOUT')
-      store.commit('auth/ADD_ERROR', e.response.data.detail)
       if (to.fullPath !== '/') {
         urlRedirect = to.fullPath
         next({ path: '/login', query: { next: to.fullPath } })

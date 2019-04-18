@@ -25,6 +25,7 @@ _axios.interceptors.response.use(
   function (error) {
     if (error.response.status === 401) {
       store.commit('auth/LOGOUT')
+      store.commit('auth/ADD_ERROR', error.response.data.detail)
     }
     // Do something with response error
     return Promise.reject(error)

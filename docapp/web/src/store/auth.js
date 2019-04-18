@@ -6,8 +6,7 @@ const namespaced = true
 const state = {
   token: null,
   profile: {},
-  errorMessage: null,
-  returnTo: null
+  errorMessage: null
 }
 
 const mutations = {
@@ -28,11 +27,8 @@ const mutations = {
   CHECK (state, payload) {
     state.profile = payload.profile
   },
-  ADD_ERROR (state, payload) {
+  ADD_ERROR (state, payload = null) {
     state.errorMessage = payload
-  },
-  ADD_RETURN (state, payload) {
-    state.returnTo = payload
   }
 }
 
