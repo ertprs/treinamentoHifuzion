@@ -1,7 +1,11 @@
 import http from '../plugins/axios'
 
 const state = {
-  clientes: []
+  clientes: [],
+  types: [
+    { id: 1, name: 'Private' },
+    { id: 2, name: 'Public' }
+  ]
 }
 
 const mutations = {

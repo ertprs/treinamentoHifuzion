@@ -21,7 +21,6 @@
       <v-card class="elevation-1 mt-2">
         <v-card-title>
           <h3>{{ titulo }}</h3>
-
           <v-alert
             :value="error.has"
             type="error"
@@ -30,10 +29,7 @@
           </v-alert>
 
         </v-card-title>
-
-        <!-- Personalização do formulário -->
-        <slot />
-
+        <slot/>
         <v-card-actions>
           <v-btn
             flat
@@ -62,13 +58,17 @@
 export default {
   props: {
     // Titulo do form
+    apiModule: {
+      type: String,
+      required: true
+    },
     titulo: {
       type: String,
       required: true
     },
     // Método da chamada para salvar na api
     apiSalvar: {
-      type: Function,
+      type: String,
       required: true
     },
     // Objeto do formulário
@@ -91,7 +91,12 @@ export default {
     }
   },
   methods: {
-    // Mostra formulário no caso da edição
+    getAction (action) {
+      if (this.apiModule) {
+        return `${this.apiModule}/${action}`
+      }
+      return action
+    },
     show () {
       this.dialog = true
     },
@@ -99,7 +104,7 @@ export default {
     async salvar () {
       this.loading = true
       try {
-        await this.apiSalvar(this.form)
+        await this.$store.dispatch(this.getAction(this.apiSalvar), this.form)
         this.loading = false
         this.dialog = false
         this.$emit('atualizar')
