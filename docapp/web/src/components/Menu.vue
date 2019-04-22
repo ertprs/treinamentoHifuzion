@@ -7,10 +7,10 @@
       <span class="hidden-sm-and-down">{{ title }}</span>
     </v-toolbar-title>
     <v-spacer></v-spacer>
-
-    <template v-for="menu in menus">
-      <v-btn icon  :key="menu.to" :to="menu.to" v-if="!menu.submenu.length">
-        <v-icon>{{menu.icon}}</v-icon>
+    <template v-for="menu in items">
+      <v-btn flat :icon="menu.icon !== ''" :key="menu.to" :to="menu.to" v-if="!menu.submenu.length">
+        <v-icon v-if="menu.icon">{{menu.icon}}</v-icon>
+        <small v-else>{{menu.to}}</small>
       </v-btn>
 
       <v-menu offset-y open-on-hover :key="menu.to" v-else>
@@ -39,6 +39,7 @@
 </template>
 
 <script>
+
 export default {
   props: {
     title: {
@@ -49,6 +50,19 @@ export default {
       type: Array,
       default: () => []
     }
+  },
+  computed: {
+    items () {
+      const filter = f => !['login', 'logout', 'home'].includes(f)
+      const routes = this.$router.options.routes.filter(f => filter(f.name)).map(route => ({
+        to: route.name,
+        icon: '',
+        submenu: []
+      }))
+      if (this.menus.length !== 0) return this.menus
+      return routes
+    }
+
   }
 }
 </script>

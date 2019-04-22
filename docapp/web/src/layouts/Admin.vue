@@ -1,8 +1,6 @@
 <template>
   <v-app id="admin">
-        <hfz-menu title="DocsApp" :menus="$store.state.menu.menus"/>
-<!--    <hfz-menu title="DocsApp" :menus="menus"/>-->
-
+    <hfz-menu title="DocsApp" :menus="$store.state.menu.menus"/>
     <v-content>
       <v-container fluid>
         <slot/>
