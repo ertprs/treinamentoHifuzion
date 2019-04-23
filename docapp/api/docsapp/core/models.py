@@ -8,13 +8,6 @@ class Menu(models.Model):
     """
     Model for store frontend menu
     """
-    ICONS = (
-        ('supervised_user_circle', 'supervised_user_circle'),
-        ('featured_play_list', 'featured_play_list'),
-        ('account_circle', 'account_circle'),
-        ('close', 'close'),
-    )
-
     to = models.CharField(
         verbose_name=_('to'),
         max_length=100,
@@ -22,8 +15,7 @@ class Menu(models.Model):
     )
     icon = models.CharField(
         verbose_name=_('icon'),
-        max_length=100,
-        choices=ICONS
+        max_length=100
     )
     relation = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
 

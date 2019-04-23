@@ -90,7 +90,7 @@ class MenuSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Menu
-        fields = ('to', 'icon', 'submenu')
+        fields = '__all__'
 
 
 class ClientSerializer(serializers.ModelSerializer):
