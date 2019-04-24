@@ -19,7 +19,7 @@
             icon
             v-on="on"
           >
-            <v-icon>done</v-icon>
+            <v-icon>{{menu.icon}}</v-icon>
           </v-btn>
         </template>
         <v-list>
@@ -53,7 +53,7 @@ export default {
   },
   computed: {
     items () {
-      const filter = f => !['login', 'logout', 'home'].includes(f)
+      const filter = f => !['login', 'home'].includes(f)
       const routes = this.$router.options.routes.filter(f => filter(f.name)).map(route => ({
         to: route.name,
         icon: '',

@@ -1,6 +1,6 @@
 <template>
   <v-app id="admin">
-    <hfz-menu title="DocsApp" :menus="$store.state.menu.menus"/>
+    <hfz-menu title="DocsApp" :menus="$store.state.menu.appmenus"/>
     <v-content>
       <v-container fluid>
         <slot/>
@@ -12,7 +12,7 @@
 <script>
 export default {
   mounted () {
-    this.$store.dispatch('menu/getMenus')
+    this.$store.dispatch('menu/getAppMenus')
   }
 }
 </script>

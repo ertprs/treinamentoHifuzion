@@ -25,5 +25,10 @@ export default [
       requiresAuth: false
     }
   },
+  {
+    path: '*',
+    name: 'notfound',
+    component: () => import('../views/NotExists.vue')
+  },
   ...registerRouterFiles(prePath)
 ]
