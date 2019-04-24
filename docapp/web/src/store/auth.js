@@ -1,5 +1,6 @@
 import http from '../plugins/axios'
 import { httpToken } from './hooks'
+import { parseHttpError } from './helpers'
 
 const namespaced = true
 
@@ -35,11 +36,7 @@ const mutations = {
 const actions = {
   authLogin: (context, credentials) => http.post('/rest-auth/login/', credentials)
     .then(res => context.commit('LOGIN', res.data))
-    .catch(err => {
-      // TAREFA TRATAR ESSE ERRO DE UMA FORMA MAIS DINAMICA
-      let message = err.response.data.non_field_errors[0]
-      throw new Error(message)
-    }),
+    .catch(err => parseHttpError(err)),
   authLogout: context => http.post('/rest-auth/logout/')
     .then(res => context.commit('LOGOUT'))
     .catch(() => context.commit('LOGOUT')),

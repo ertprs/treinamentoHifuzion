@@ -41,5 +41,6 @@ export {
   defaultMutation,
   load,
   save,
-  remove
+  remove,
+  parseHttpError
 }
