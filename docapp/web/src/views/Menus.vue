@@ -4,7 +4,7 @@
       :data="$store.state.menu.menus"
       :items="items"
       api-module="menu"
-      api-get="getMenus"
+      api-get="load"
       api-save="save"
       api-remove="remove"
     />

@@ -12,7 +12,7 @@
 <script>
 export default {
   mounted () {
-    this.$store.dispatch('menu/getAppMenus')
+    this.$store.dispatch('menu/loadAppMenus')
   }
 }
 </script>

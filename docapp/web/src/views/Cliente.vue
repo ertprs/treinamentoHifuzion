@@ -4,9 +4,9 @@
       :data="$store.state.cliente.clientes"
       :items="items"
       api-module="cliente"
-      api-get="loadClientes"
-      api-save="saveCliente"
-      api-remove="removeCliente"
+      api-get="load"
+      api-save="save"
+      api-remove="remove"
     />
   </div>
 </template>

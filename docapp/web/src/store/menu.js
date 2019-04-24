@@ -1,4 +1,4 @@
-import http from '../plugins/axios'
+import { defaultMutation, load, save, remove } from './helpers'
 
 const namespaced = true
 
@@ -8,28 +8,17 @@ const state = {
 }
 
 const mutations = {
-  APPLY (state, payload = []) {
-    state.menus = payload
-  },
-  APP_MENU_APPLY (state, payload = []) {
-    state.appmenus = payload
-  }
+  MENUS: (state, payload = []) => defaultMutation(state, 'menus', payload),
+  APPMENUS: (state, payload = []) => defaultMutation(state, 'appmenus', payload)
 }
 
+const url = '/core/menus/'
+
 const actions = {
-  getMenus: context => http.get('/core/menus/')
-    .then(res => context.commit('APPLY', res.data))
-    .catch(() => context.commit('APPLY')),
-  getAppMenus: context => http.get('/core/appmenus/')
-    .then(res => context.commit('APP_MENU_APPLY', res.data))
-    .catch(() => context.commit('APP_MENU_APPLY')),
-  save: (context, form) => {
-    if (form.id) {
-      return http.patch(`core/menus/${form.id}/`, form)
-    }
-    return http.post('core/menus/', form)
-  },
-  remove: (context, id) => http.delete(`core/menus/${id}/`)
+  load: context => load(url, 'MENUS', context),
+  loadAppMenus: context => load('/core/appmenus/', 'APPMENUS', context),
+  save: (context, form) => save(url, context, form),
+  remove: (context, id) => remove(url, context, id)
 }
 
 export default { namespaced, state, mutations, actions }
