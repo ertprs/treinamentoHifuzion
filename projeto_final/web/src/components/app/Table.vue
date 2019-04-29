@@ -13,7 +13,7 @@
               placeholder="Pesquisar"
               single-line
               hide-details
-              :solo="solo"
+              :solo-inverted="solo"
               class="mb-2"
               @focus="solo = !solo"
               @blur="solo = !solo"

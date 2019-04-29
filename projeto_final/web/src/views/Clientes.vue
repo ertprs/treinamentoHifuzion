@@ -67,10 +67,7 @@
                         :items="items"
                         :data="clientes"
                         apiModule="cliente"
-                        apiLoad="load"
-                        apiSave="save"
-                        apiRemove="remove"
-              />
+              ></app-crud>
             </v-flex>
           </v-layout>
         </v-flex>

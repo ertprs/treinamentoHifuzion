@@ -89,9 +89,6 @@ export default {
       this.form = item
       this.$refs.form.show()
     },
-    remove (item) {
-      console.log('remove', item)
-    },
     clearForm () {
       this.form = {}
     }
