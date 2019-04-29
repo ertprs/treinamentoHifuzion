@@ -1,35 +1,27 @@
 <template>
   <v-app>
-    <v-toolbar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        flat
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-toolbar>
-
-    <v-content>
-      <router-view/>
-    </v-content>
+    <core-filter></core-filter>
+    <core-toolbar :notifications="notifications"></core-toolbar>
+    <core-drawer></core-drawer>
+    <core-view></core-view>
   </v-app>
 </template>
 
 <script>
-
 export default {
-  name: 'App',
   data () {
     return {
-      //
+      notifications: []
     }
   }
 }
 </script>
+
+<style lang="scss">
+  @import '@/styles/index.scss';
+
+  /* Remove in 1.2 */
+  .v-datatable thead th.column.sortable i {
+    vertical-align: unset;
+  }
+</style>
