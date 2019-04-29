@@ -1,0 +1,24 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+sqlformatter = "*"
+notebook = "*"
+werkzeug = "*"
+
+[packages]
+django = "*"
+python-decouple = "*"
+dj-database-url = "*"
+django-cors-headers = "*"
+django-extensions = "*"
+django-filter = "*"
+django-rest-auth = "*"
+djangorestframework = "*"
+pillow = "*"
+psycopg2 = "*"
+
+[requires]
+python_version = "3.7"
