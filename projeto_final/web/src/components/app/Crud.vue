@@ -20,7 +20,6 @@
         :api-remove="getAction(apiRemove)"
         @reloadItems="reload"
         @editItem="edit"
-        @removeItem="remove"
       ></app-crud-table>
     </v-flex>
   </v-container>
