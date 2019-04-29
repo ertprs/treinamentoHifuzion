@@ -12,7 +12,7 @@
     >
       <v-card
         v-if="!$slots.offset"
-        :color="color"
+        color="primary"
         :class="`elevation-${elevation}`"
         class="v-card--material__header"
         dark

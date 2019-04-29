@@ -1,44 +1,27 @@
-const clientes = [
-  {
-    id: 1,
-    type_person_display: 'Public',
-    name: 'William Galleti',
-    address: 'Av. Curimba, 1140 - Centro\nSapezal - MT\n78365-000',
-    email: 'william.galleti@gmail.com',
-    phone: '65999448004',
-    second_phone: null,
-    type_person: 2
-  },
-  {
-    id: 2,
-    type_person_display: 'Public',
-    name: 'teste',
-    address: 'teste',
-    email: 'odasko@email.com',
-    phone: 'dasojidas',
-    second_phone: null,
-    type_person: 2
-  },
-  {
-    id: 3,
-    type_person_display: 'Public',
-    name: 'teste',
-    address: 'la em casa',
-    email: 'dasdsa@email.com',
-    phone: '999999',
-    second_phone: null,
-    type_person: 2
-  }
-]
+import { load, remove, save, set } from '../utils/vuex'
 
 const state = {
-  clientes: []
+  clientes: [],
+  types: [
+    { id: 1, name: 'Private' },
+    { id: 2, name: 'Public' }
+  ],
+  graficoVenda: {
+    categorias: [],
+    series: []
+  }
 }
 
 const mutations = {
-  CLIENTES (state, payload = null) {
-    state.clientes = clientes
-  }
+  CLIENTES: set('clientes')
 }
 
-export default { state, mutations }
+const url = '/core/clients/'
+
+const actions = {
+  load: (context, filter = null) => load(url, 'CLIENTES', context, filter),
+  save: (context, form) => save(url, context, form),
+  remove: (context, id) => remove(url, context, id)
+}
+
+export default { namespaced: true, state, mutations, actions }

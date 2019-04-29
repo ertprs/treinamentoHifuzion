@@ -60,7 +60,7 @@ const save = (url, context, form) => {
     .catch(err => parseHttpError(err))
 }
 
-const remove = (url, context, id) => http.delete(`${url}${id}/`)
+const remove = (url, context, { id }) => http.delete(`${url}${id}/`)
 
 export {
   load,
