@@ -51,10 +51,10 @@
                 >
                   edit
                 </v-icon>
-                <app-remove :item="props.item"
+                <app-crud-remove :item="props.item"
                             :apiRemove="apiRemove"
                             @removeItem="$emit('reloadItems')">
-                </app-remove>
+                </app-crud-remove>
               </td>
             </template>
           </template>

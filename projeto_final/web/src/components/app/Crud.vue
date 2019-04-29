@@ -3,7 +3,7 @@
                fluid
                grid-list-md>
     <v-flex sm12>
-      <app-form
+      <app-crud-form
         ref="form"
         :title="`Editor de ${title}`"
         :api-save="getAction(apiSave)"
@@ -11,8 +11,8 @@
         :form-items="formItems"
         @reload="reload"
         @clearForm="clearForm"
-      ></app-form>
-      <app-table
+      ></app-crud-form>
+      <app-crud-table
         :title="title"
         :headers="headers"
         :loading="loading"
@@ -21,7 +21,7 @@
         @reloadItems="reload"
         @editItem="edit"
         @removeItem="remove"
-      ></app-table>
+      ></app-crud-table>
     </v-flex>
   </v-container>
 </template>
