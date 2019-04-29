@@ -12,5 +12,11 @@ export default [
     path: '/clientes',
     view: 'Clientes',
     icon: 'account_circle'
+  },
+  {
+    path: '/user-profile',
+    view: 'UserProfile',
+    name: 'User Profile',
+    icon: 'account_circle'
   }
 ]

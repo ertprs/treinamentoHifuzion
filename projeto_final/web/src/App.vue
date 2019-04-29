@@ -1,6 +1,7 @@
 <template>
   <v-app>
 <!--    <core-filter></core-filter>-->
+    <app-login></app-login>
     <core-toolbar :notifications="notifications"></core-toolbar>
     <core-drawer></core-drawer>
     <core-view></core-view>

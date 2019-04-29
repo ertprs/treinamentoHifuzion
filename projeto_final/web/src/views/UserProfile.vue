@@ -123,9 +123,9 @@
             class="mx-auto d-block"
             size="130"
           >
-            <img
-              src="https://demos.creative-tim.com/vue-material-dashboard/img/marc.aba54d65.jpg"
-            >
+            <v-img
+              src="./img/profile.png"
+            />
           </v-avatar>
           <v-card-text class="text-xs-center">
             <h6 class="category text-gray font-weight-thin mb-3">CEO / CO-FOUNDER</h6>

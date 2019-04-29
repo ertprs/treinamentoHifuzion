@@ -19,14 +19,18 @@
           color="white"
         >
           <v-img
-            :src="logo"
+            :src="imgProfile"
             height="34"
-            contain
           />
         </v-list-tile-avatar>
         <v-list-tile-title class="title">
-          William Galleti
+          {{profile.user_info.username}}
         </v-list-tile-title>
+        <v-list-tile-action>
+          <v-btn icon ripple @click="authLogout">
+            <v-icon color="red lighten-1">close</v-icon>
+          </v-btn>
+        </v-list-tile-action>
       </v-list-tile>
       <v-divider/>
       <v-list-tile
@@ -49,16 +53,27 @@
 </template>
 
 <script>
-import { mapMutations, mapState } from 'vuex'
+import { mapMutations, mapState, mapActions } from 'vuex'
 import routes from '../../router/routes'
 
 export default {
   data: () => ({
-    logo: './img/profile.jpg',
     responsive: false
   }),
   computed: {
     ...mapState('app', ['image', 'color']),
+    ...mapState('auth', ['profile']),
+    imgProfile () {
+      let photo = ''
+      try {
+        photo = `http://localhost:8000${this.profile.photo}`
+
+        if (this.profile.photo === null) return './img/profile.png'
+      } catch {
+        photo = './img/profile.png'
+      }
+      return photo
+    },
     links () {
       return routes.map(m => ({ to: m.path, text: m.name || m.view, icon: m.icon || 'list' }))
     },
@@ -83,6 +98,7 @@ export default {
   },
   methods: {
     ...mapMutations('app', ['setDrawer', 'toggleDrawer']),
+    ...mapActions('auth', ['authLogout']),
     onResponsiveInverted () {
       if (window.innerWidth < 991) {
         this.responsive = true

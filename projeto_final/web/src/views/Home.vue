@@ -1,3 +1,3 @@
 <template>
-  <h1>Home</h1>
+  <h1>Home - {{$store.getters['auth/loginModalShow']}}</h1>
 </template>

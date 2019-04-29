@@ -3,73 +3,13 @@
     <v-container fluid
                  grid-list-md>
       <v-layout wrap row>
-        <v-flex
-          sm12
-          md3
-        >
-          <material-chart-card
-            :data="dailySalesChart.data"
-            :options="dailySalesChart.options"
-            color="info"
-            type="Line"
-          >
-            <h4 class="title font-weight-light">Daily Sales</h4>
-            <p class="category d-inline-flex font-weight-light">
-              <v-icon
-                color="green"
-                small
-              >
-                mdi-arrow-up
-              </v-icon>
-              <span class="green--text">55%</span>&nbsp;
-              increase in today's sales
-            </p>
-
-            <template slot="actions">
-              <v-icon
-                class="mr-2"
-                small
-              >
-                mdi-clock-outline
-              </v-icon>
-              <span class="caption grey--text font-weight-light">updated 4 minutes ago</span>
-            </template>
-          </material-chart-card>
-        </v-flex>
-        <v-flex md9 sm12>
-          <v-layout wrap row>
-            <v-flex
-              sm6
-              xs12
-            >
-              <material-stats-card
-                color="green"
-                icon="mdi-store"
-                title="Clientes"
-                :value="clientes.length.toString()"
-              />
-            </v-flex>
-            <v-flex
-              sm6
-              xs12
-            >
-              <material-stats-card
-                color="orange"
-                icon="mdi-content-copy"
-                title="Total Balance"
-                :value="totalBalance.toLocaleString()"
-                small-value="R$"
-              />
-            </v-flex>
-            <v-flex xs12>
-              <app-crud style="margin-top: -70px;"
-                        title="Clientes"
-                        :items="items"
-                        :data="clientes"
-                        apiModule="cliente"
-              ></app-crud>
-            </v-flex>
-          </v-layout>
+        <v-flex xs12>
+          <app-crud style="margin-top: -70px;"
+                    title="Clientes"
+                    :items="items"
+                    :data="clientes"
+                    apiModule="cliente"
+          ></app-crud>
         </v-flex>
       </v-layout>
     </v-container>
@@ -80,31 +20,6 @@
 import { mapState } from 'vuex'
 
 export default {
-  data () {
-    return {
-      dailySalesChart: {
-        data: {
-          labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-          series: [
-            [12, 17, 7, 17, 23, 18, 38]
-          ]
-        },
-        options: {
-          lineSmooth: this.$chartist.Interpolation.cardinal({
-            tension: 0
-          }),
-          low: 0,
-          high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-          chartPadding: {
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0
-          }
-        }
-      }
-    }
-  },
   computed: {
     ...mapState('cliente', ['clientes']),
     requiredField () {

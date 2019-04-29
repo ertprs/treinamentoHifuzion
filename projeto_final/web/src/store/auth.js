@@ -44,7 +44,8 @@ const actions = {
 }
 
 const getters = {
-  isAuthenticated: state => !!state.token
+  isAuthenticated: state => !!state.token,
+  loginModalShow: state => state.token === null
 }
 
 export default { state, mutations, actions, getters }

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import routes from './routes'
+import { authGuardModal } from './guard'
 
 function route (path, view, name) {
   return {
@@ -25,5 +26,7 @@ const router = new Router({
     return { x: 0, y: 0 }
   }
 })
+
+router.beforeEach(authGuardModal)
 
 export default router
