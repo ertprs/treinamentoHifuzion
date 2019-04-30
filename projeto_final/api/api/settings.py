@@ -30,6 +30,7 @@ THIRD_APPS = [
 
 LOCAL_APPS = [
     'core',
+    'academy',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_APPS + LOCAL_APPS

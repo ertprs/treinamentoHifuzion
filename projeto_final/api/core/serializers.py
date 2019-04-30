@@ -9,17 +9,17 @@ class UserSerializer(serializers.ModelSerializer):
 
     def get_groups(self, user: User):
         if hasattr(user, 'groups'):
-            return user.groups.all().values_list('name', flat=True)
+            return [dict(id=g.id, name=g.name) for g in user.groups.all()]
         return []
 
     def get_permissions(self, user: User):
         if hasattr(user, 'user_permissions'):
-            return user.user_permissions.all().values_list('name', flat=True)
+            return [dict(id=p.id, name=p.name) for p in user.user_permissions.all()]
         return []
 
     class Meta:
         model = User
-        fields = '__all__'
+        exclude = ('password', 'user_permissions')
 
 
 class TokenSerializer(serializers.ModelSerializer):

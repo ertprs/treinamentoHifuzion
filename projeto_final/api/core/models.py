@@ -32,7 +32,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     photo = models.ImageField(_('photo'), upload_to='profile/', blank=True, null=True)
-    skype = models.CharField(_('skype'), max_length=100, blank=True, null=True)
 
     objects = UserManager()
 
