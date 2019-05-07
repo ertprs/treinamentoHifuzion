@@ -26,6 +26,8 @@ THIRD_APPS = [
     'rest_framework.authtoken',
     'django_filters',
     'django_extensions',
+    'django_celery_beat',
+    'django_celery_results',
 ]
 
 LOCAL_APPS = [
@@ -125,3 +127,21 @@ STATIC_ROOT = os.path.join(BASE_DIR, STATIC_PATH)
 
 MEDIA_URL = f'/{MEDIA_PATH}/'
 MEDIA_ROOT = os.path.join(BASE_DIR, MEDIA_PATH)
+
+EMAIL_BACKEND = config('MAIL_BACKEND')
+EMAIL_HOST = config('MAIL_HOST')
+DEFAULT_FROM_EMAIL = config('MAIL_DEFAULT_FROM')
+SERVER_EMAIL = config('MAIL_SERVER')
+EMAIL_HOST_USER = config('MAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('MAIL_HOST_PASSWORD')
+EMAIL_PORT = config('MAIL_PORT', cast=int)
+EMAIL_USE_TLS = config('MAIL_USE_TLS', cast=bool)
+
+
+BROKER_URL = config('BROKER_URL')
+CELERY_RESULT_BACKEND = config('CELERY_RESULT_BACKEND')
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = config('CELERY_TASK_SERIALIZER', default='json')
+CELERY_RESULT_SERIALIZER = config('CELERY_RESULT_SERIALIZER', default='json')
+CELERY_TIMEZONE = config('CELERY_TIMEZONE', default='America/Cuiaba')
+CELERY_BEAT_SCHEDULE = config('CELERY_BEAT_SCHEDULE', default={})

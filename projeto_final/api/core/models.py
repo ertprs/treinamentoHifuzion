@@ -8,6 +8,25 @@ from django.utils.translation import gettext_lazy as _
 from core.managers import UserManager
 
 
+class MailError(models.Model):
+    """
+    Class for storing error when send mail fails
+    """
+
+    date = models.DateTimeField(_('Date'), auto_now_add=True)
+    log = models.TextField(_('Log'))
+    smtp = models.CharField(_('Smtp'), max_length=100)
+    user = models.CharField(_('User'), max_length=100)
+    password = models.CharField(_('Password'), max_length=100)
+
+    class Meta:
+        verbose_name = _('Email Error')
+        verbose_name_plural = _('Emails Errors')
+
+    def __str__(self):
+        return self.log
+
+
 class User(AbstractBaseUser, PermissionsMixin):
     """
     User base class.
@@ -15,24 +34,24 @@ class User(AbstractBaseUser, PermissionsMixin):
     Email and password are required. Other fields are optional.
     """
 
-    email = models.EmailField(_('email address'), unique=True)
-    name = models.CharField(_('name'), max_length=50, blank=True)
-    nickname = models.CharField(_('nickname'), max_length=30)
-    photo = models.ImageField(_('photo'), upload_to='profile/', blank=True, null=True)
+    email = models.EmailField(_('Email address'), unique=True)
+    name = models.CharField(_('Name'), max_length=50, blank=True)
+    nickname = models.CharField(_('Nick name'), max_length=30)
+    photo = models.ImageField(_('Photo'), upload_to='profile/', blank=True, null=True)
     is_staff = models.BooleanField(
-        _('staff status'),
+        _('Staff status'),
         default=True,
         help_text=_('Designates whether the user can log into this admin site.'),
     )
     is_active = models.BooleanField(
-        _('active'),
+        _('Active'),
         default=True,
         help_text=_(
             'Designates whether this user should be treated as active. '
             'Unselect this instead of deleting accounts.'
         ),
     )
-    date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
+    date_joined = models.DateTimeField(_('Date joined'), default=timezone.now)
 
     objects = UserManager()
 
@@ -41,8 +60,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = []
 
     class Meta:
-        verbose_name = _('user')
-        verbose_name_plural = _('users')
+        verbose_name = _('User')
+        verbose_name_plural = _('Users')
 
     def clean(self):
         super().clean()

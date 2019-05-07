@@ -20,6 +20,10 @@ django-rest-auth = "*"
 djangorestframework = "*"
 pillow = "*"
 psycopg2 = "*"
+celery = "*"
+redis = "*"
+django-celery-beat = "*"
+django-celery-results = "*"
 
 [requires]
 python_version = "3.7"
