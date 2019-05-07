@@ -5,10 +5,10 @@
       <v-layout wrap row>
         <v-flex xs12>
           <app-crud style="margin-top: -70px;"
-                    title="Clientes"
+                    title="Atividades"
                     :items="items"
-                    :data="clientes"
-                    apiModule="cliente"
+                    :data="atividades"
+                    apiModule="atividade"
           ></app-crud>
         </v-flex>
       </v-layout>
@@ -21,6 +21,7 @@ import { mapState } from 'vuex'
 
 export default {
   computed: {
+    ...mapState('atividade', ['atividades']),
     ...mapState('cliente', ['clientes']),
     requiredField () {
       return v => !!v || 'Campo obrigatório'
@@ -29,40 +30,29 @@ export default {
       return [
         { text: '#', value: 'id', width: '10', component: 'v-text-field' },
         {
-          text: 'Nome',
-          value: 'name',
+          text: 'Titulo',
+          value: 'title',
+          width: '100',
+          component: 'v-text-field',
+          rules: [this.requiredField]
+        },
+        {
+          text: 'Descrição',
+          value: 'description',
           width: '200',
-          component: 'v-text-field',
+          component: 'v-textarea',
           rules: [this.requiredField]
         },
         {
-          text: 'Apelido',
-          value: 'nick_name',
-          width: '200',
-          component: 'v-text-field',
-          rules: [this.requiredField]
-        },
-        { text: 'Fone', value: 'phone', width: '100', component: 'v-text-field', showInTable: false },
-        {
-          text: 'Celular',
-          value: 'mobile_phone',
-          width: '150',
-          component: 'v-text-field',
-          rules: [this.requiredField]
+          text: 'Cliente',
+          value: 'client_display',
+          width: '150'
         },
         {
-          text: 'Email',
-          value: 'email',
-          component: 'v-text-field',
-          rules: [
-            this.requiredField,
-            v => /[\w_.-]+@[\w-]+\.[\w-]{1,3}(?:\.[\w-]{1,3})?/.test(v) || 'Insira um email válido'
-          ]
-        },
-        {
-          text: 'Nascimento',
-          value: 'birthday',
-          component: 'v-text-field',
+          text: 'Cliente',
+          value: 'client',
+          component: 'v-select',
+          config: { items: this.clientes, value: 'name', id: 'id' },
           rules: [this.requiredField],
           showInTable: false
         },

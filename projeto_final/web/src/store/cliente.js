@@ -16,7 +16,7 @@ const mutations = {
   CLIENTES: set('clientes')
 }
 
-const url = '/core/clients/'
+const url = '/crm/clients/'
 
 const actions = {
   load: (context, filter = null) => load(url, 'CLIENTES', context, filter),

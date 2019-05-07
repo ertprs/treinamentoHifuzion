@@ -23,7 +23,7 @@ const mutations = {
     httpToken(http)
   },
   CHECK (state, payload) {
-    state.profile = payload.profile
+    state.profile = payload
   },
   ADD_ERROR (state, payload = null) {
     state.errorMessage = payload

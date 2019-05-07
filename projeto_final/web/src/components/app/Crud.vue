@@ -77,7 +77,7 @@ export default {
     },
     reload () {
       this.loading = true
-      this.$store.dispatch('cliente/load')
+      this.$store.dispatch(this.getAction(this.apiLoad))
         .then(() => (this.loading = false))
         .catch(err => {
           this.error.has = true

@@ -24,7 +24,7 @@
           />
         </v-list-tile-avatar>
         <v-list-tile-title class="title">
-          {{profile.user_info.username}}
+          {{profile.nickname}}
         </v-list-tile-title>
         <v-list-tile-action>
           <v-btn icon ripple @click="authLogout">
@@ -64,15 +64,10 @@ export default {
     ...mapState('app', ['image', 'color']),
     ...mapState('auth', ['profile']),
     imgProfile () {
-      let photo = ''
-      try {
-        photo = `http://localhost:8000${this.profile.photo}`
-
-        if (this.profile.photo === null) return './img/profile.png'
-      } catch {
-        photo = './img/profile.png'
+      if (this.profile.photo === null) {
+        return './img/profile.png'
       }
-      return photo
+      return this.profile.photo
     },
     links () {
       return routes.map(m => ({ to: m.path, text: m.name || m.view, icon: m.icon || 'list' }))
