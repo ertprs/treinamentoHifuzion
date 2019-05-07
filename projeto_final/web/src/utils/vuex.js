@@ -48,7 +48,7 @@ const parseHttpError = error => {
   }
 }
 
-const load = (url, commit, context, filter = null) => http.get(url, filter)
+const load = (url, commit, context, filter = null) => http.get(url, { params: filter })
   .then(res => context.commit(commit, res.data))
 
 const save = (url, context, form) => {

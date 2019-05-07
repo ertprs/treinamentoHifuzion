@@ -22,6 +22,7 @@
             </v-text-field>
           </v-flex>
           <v-spacer></v-spacer>
+          <slot name="extras"></slot>
           <v-btn icon @click="$emit('reloadItems')" :loading="loading">
             <v-icon medium>refresh</v-icon>
           </v-btn>
@@ -35,28 +36,30 @@
           :loading="loading"
         >
           <template v-slot:items="props" v-if="!loading">
-            <td
-              v-for="i in headers.filter(h => h.value)"
-              :key="i.value"
-              :class="{'text-xs-right': i.align === 'right'}"
-            >
-              {{props.item[i.value]}}
-            </td>
-            <template v-if="headers.filter(h => !h.value).length > 0">
-              <td class="justify-center layout ma-1">
-                <v-icon
-                  small
-                  class="mr-1"
-                  @click="$emit('editItem', props.item)"
-                >
-                  edit
-                </v-icon>
-                <app-crud-remove :item="props.item"
-                            :apiRemove="apiRemove"
-                            @removeItem="$emit('reloadItems')">
-                </app-crud-remove>
+            <tr @click="$emit('selectedRow', props.item)">
+              <td
+                v-for="i in headers.filter(h => h.value)"
+                :key="i.value"
+                :class="{'text-xs-right': i.align === 'right'}"
+              >
+                {{props.item[i.value]}}
               </td>
-            </template>
+              <template v-if="headers.filter(h => !h.value).length > 0">
+                <td class="justify-center layout ma-1">
+                  <v-icon
+                    small
+                    class="mr-1"
+                    @click="$emit('editItem', props.item)"
+                  >
+                    edit
+                  </v-icon>
+                  <app-crud-remove :item="props.item"
+                              :apiRemove="apiRemove"
+                              @removeItem="$emit('reloadItems')">
+                  </app-crud-remove>
+                </td>
+              </template>
+            </tr>
           </template>
           <template v-slot:footer v-else>
             <td :colspan="headers.length" class="text-xs-center">

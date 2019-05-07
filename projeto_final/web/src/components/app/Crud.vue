@@ -20,7 +20,12 @@
         :api-remove="getAction(apiRemove)"
         @reloadItems="reload"
         @editItem="edit"
-      ></app-crud-table>
+        @selectedRow="selectedRow"
+      >
+        <template v-slot:extras>
+          <slot name="extras"/>
+        </template>
+      </app-crud-table>
     </v-flex>
   </v-container>
 </template>
@@ -90,6 +95,9 @@ export default {
     },
     clearForm () {
       this.form = {}
+    },
+    selectedRow (item) {
+      this.$emit('selectedRow', item)
     }
   },
   mounted () {

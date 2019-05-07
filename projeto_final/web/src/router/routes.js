@@ -13,11 +13,11 @@ export default [
     path: '/atividades',
     view: 'Atividades',
     icon: 'list'
-  },
-  {
-    path: '/user-profile',
-    view: 'UserProfile',
-    name: 'User Profile',
-    icon: 'account_circle'
   }
+  // {
+  //   path: '/user-profile',
+  //   view: 'UserProfile',
+  //   name: 'User Profile',
+  //   icon: 'account_circle'
+  // }
 ]

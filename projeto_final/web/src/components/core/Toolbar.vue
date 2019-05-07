@@ -69,13 +69,13 @@
             </v-list>
           </v-card>
         </v-menu>
-        <v-btn
-          flat
-          class="toolbar-items"
-          to="/user-profile"
-        >
-          <v-icon color="tertiary">mdi-account</v-icon>
-        </v-btn>
+<!--        <v-btn-->
+<!--          flat-->
+<!--          class="toolbar-items"-->
+<!--          to="/user-profile"-->
+<!--        >-->
+<!--          <v-icon color="tertiary">mdi-account</v-icon>-->
+<!--        </v-btn>-->
       </v-flex>
     </v-toolbar-items>
   </v-toolbar>
