@@ -1,6 +1,7 @@
 .env
 .envdev
 .idea
+.vscode
 .venv
 *.sqlite3
 *pyc

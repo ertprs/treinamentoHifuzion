@@ -15,6 +15,7 @@ class Client(models.Model):
     phone = models.CharField(_('Phone'), max_length=20, null=True, blank=True)
     mobile_phone = models.CharField(_('Mobile phone'), max_length=20)
     birthday = models.DateField(_('Birthday'))
+    disabled = models.BooleanField(default=False)
 
     objects = ClientManager()
 

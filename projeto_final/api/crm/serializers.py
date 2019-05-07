@@ -19,7 +19,7 @@ class ActivitySerializer(serializers.ModelSerializer):
     """
     client_display = serializers.SerializerMethodField()
     done = serializers.BooleanField(read_only=True)
-    elapsed_time = serializers.TimeField(read_only=True)
+    elapsed_time = serializers.CharField(read_only=True)
 
     def get_client_display(self, activity: Activity):
         return activity.client.name
