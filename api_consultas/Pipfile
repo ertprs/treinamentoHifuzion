@@ -9,6 +9,9 @@ verify_ssl = true
 django = "*"
 djangorestframework = "*"
 jupyter = "*"
+requests = "*"
+django-extensions = "*"
+sqlformatter = "*"
 
 [requires]
 python_version = "3.7"
